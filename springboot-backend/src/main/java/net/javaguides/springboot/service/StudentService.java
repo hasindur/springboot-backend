@@ -6,6 +6,8 @@ import net.javaguides.springboot.model.Student;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class StudentService {
@@ -21,5 +23,10 @@ public class StudentService {
         }else {
             return ResponseEntity.ok(student);
         }
+    }
+
+    public ResponseEntity<List<Student>> getAllStudents() {
+        List<Student> studentList = studentDao.findAll();
+        return ResponseEntity.ok(studentList);
     }
 }
