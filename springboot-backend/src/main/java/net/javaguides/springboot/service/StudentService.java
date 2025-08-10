@@ -62,4 +62,18 @@ public class StudentService {
             }
         }
     }
+
+    public ResponseEntity<String> deleteStudent(Long studentId) {
+        if (studentId == null) {
+            throw new RuntimeException("Student ID cannot be null");
+        }else {
+            Optional<Student> optionalStudent = studentDao.findById(Long.valueOf(studentId));
+            if (optionalStudent.isPresent()){
+                studentDao.deleteById(studentId);
+                return ResponseEntity.ok("Student deleted successfully with ID: " + studentId);
+            } else {
+                throw new RuntimeException("Student not found with ID: " + studentId);
+            }
+        }
+    }
 }
